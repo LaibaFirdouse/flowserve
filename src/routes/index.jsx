@@ -15,6 +15,7 @@ import PricingEngine from "../pages/provider/PricingEngine";
 
 import RequireAuth from "../guards/RequireAuth";
 import RequireRole from "../guards/RequireRole";
+import Checkout from "../pages/app/Checkout";
 
 export default function AppRouter() {
   return (
@@ -27,7 +28,7 @@ export default function AppRouter() {
       </Route>
 
       {/* ---------- USER APP ---------- */}
-      <Route
+      {/* <Route
         path="/app"
         element={
           <RequireAuth>
@@ -36,16 +37,39 @@ export default function AppRouter() {
         }
       >
         <Route path="services" element={<Services />} />
-        <Route path="cart" element={<Cart />} />
+        <Route
+  path="cart"
+  element={
+    <RequireRole allowedRoles={["user", "provider"]}>
+      <Cart />
+    </RequireRole>
+  }
+/>
         <Route path="orders" element={<Orders />} />
-      </Route>
+        <Route path="checkout" element={<Checkout />} />
+      </Route> */}
+      <Route
+  path="/app"
+  element={
+    <RequireAuth>
+      <AppLayout />
+    </RequireAuth>
+  }
+>
+  <Route path="services" element={<Services />} />
+  <Route path="cart" element={<Cart />} />
+  <Route path="checkout" element={<Checkout />} />
+  <Route path="orders" element={<Orders />} />
+</Route>
+
+      
 
       {/* ---------- PROVIDER ---------- */}
       <Route
         path="/provider"
         element={
           <RequireAuth>
-            <RequireRole role="provider">
+            <RequireRole allowedRoles={["provider"]}>
               <ProviderLayout />
             </RequireRole>
           </RequireAuth>

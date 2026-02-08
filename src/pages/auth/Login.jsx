@@ -6,13 +6,18 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    login({
-      id: 1,
-      email: "user@test.com",
-      role: "user"
-    });
-    navigate("/app/services");
+  const user = {
+    id: 1,
+    email: "user@test.com",
+    role: "user"
   };
+
+  localStorage.setItem("user", JSON.stringify(user));
+  login(user);
+  navigate("/app/services");
+};
+
+
 // const handleLogin = () => {
 //   login({
 //     id: 1,
