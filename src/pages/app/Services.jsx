@@ -2,12 +2,16 @@ import { useState, useMemo,useEffect } from "react";
 import { useServices } from "../../hooks/useServices";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Services() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [addedId, setAddedId] = useState(null);
   const { addItem } = useCart();
+  const { user } = useAuth();
+const navigate = useNavigate();
   
 
   const debouncedSearch = useDebounce(search, 500);
@@ -25,13 +29,16 @@ export default function Services() {
       <p>₹{service.price}</p>
 
       <button
-        onClick={() => {
-          addItem(service);
-          setAddedId(service.id);
-        }}
-      >
-        {addedId === service.id ? "Added ✔" : "Add to Cart"}
-      </button>
+  onClick={() => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    addItem(service);
+  }}
+>
+  Add to Cart
+</button>
     </li>
   ));
 }, [data, addItem, addedId]);
@@ -55,14 +62,14 @@ export default function Services() {
   return <p className="muted">No services match your search</p>;
 
   return (
-    <div>
-      <h3>Services</h3>
+    <div className="services-header">
+  <h3>Available Services</h3>
 
-      <input
-        placeholder="Search services..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+  <input
+    placeholder="Search services..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
 
       <ul className="service-grid">
   {renderedList}

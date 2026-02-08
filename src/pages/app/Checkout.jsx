@@ -11,6 +11,7 @@ const [email, setEmail] = useState("");
       <p className="step-indicator">
       Step {step} of 4
     </p>
+    <div className="checkout-step">
 
       {step === 1 && (
         <>
@@ -57,6 +58,7 @@ const [email, setEmail] = useState("");
           <p>Your order has been placed.</p>
         </>
       )}
+      </div>
     </div>
   );
 }
