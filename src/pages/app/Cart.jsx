@@ -1,48 +1,95 @@
-import { useMemo } from "react";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-  const { items, removeItem } = useCart();
+  const { items, addItem, decrementItem, removeItem } = useCart();
   const navigate = useNavigate();
 
-  const total = useMemo(() => {
-    return items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-  }, [items]);
-
-  if (items.length === 0) return <p>Cart is empty</p>;
+  const total = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
-    <div>
-      <h3>Your Cart</h3>
+    <div className="cart-page">
+      <div className="cart-container">
 
-      <ul>
-  {items.map(item => (
-    <li key={item.id} className="cart-row">
-      <div>
-        <strong>{item.title}</strong>
-        <span>Qty: {item.quantity}</span>
+        {/* LEFT SIDE */}
+        <div className="cart-items">
+          <h2>Your Cart</h2>
+
+          {items.length === 0 ? (
+            <p className="muted">Your cart is empty</p>
+          ) : (
+            items.map(item => (
+              <div key={item.id} className="cart-card">
+                <div className="cart-info">
+                  <h4>{item.title}</h4>
+                  <p className="price">₹{item.price}</p>
+                </div>
+
+                <div className="cart-actions">
+                  {/* <div className="qty-controls">
+                    <button
+                      onClick={() =>
+                        item.quantity > 1
+                          ? removeItem(item.id)
+                          : removeItem(item.id)
+                      }
+                    >
+                      −
+                    </button>
+
+                    <span>{item.quantity}</span>
+
+                    <button onClick={() => addItem(item)}>
+                      +
+                    </button>
+                  </div> */}
+                  <div className="qty-controls">
+  <button onClick={() => decrementItem(item.id)}>
+    −
+  </button>
+
+  <span>{item.quantity}</span>
+
+  <button onClick={() => addItem(item)}>
+    +
+  </button>
+</div>
+
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="cart-summary">
+          <h3>Order Summary</h3>
+
+          <div className="summary-row">
+            <span>Subtotal</span>
+            <span>₹{total}</span>
+          </div>
+
+          <div className="summary-row total">
+            <span>Total</span>
+            <span>₹{total}</span>
+          </div>
+
+          <button className="checkout-btn" onClick={() => navigate("/app/checkout")} >
+            Proceed to Checkout
+          </button>
+        </div>
+
       </div>
-
-      <div>
-        ₹{item.price * item.quantity}
-        <button onClick={() => removeItem(item.id)}>
-          Remove
-        </button>
-      </div>
-    </li>
-  ))}
-</ul>
-      <button onClick={() => navigate("/app/checkout")}>
-  Proceed to Checkout
-</button>
-
-      <h4 className="cart-total">
-  Total: ₹{total}
-</h4>
     </div>
   );
 }

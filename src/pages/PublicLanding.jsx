@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Card from "../components/Card";
+
+
 
 export default function PublicLanding() {
   const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState(null);
 
   return (
     <div className="landing">
@@ -28,50 +33,82 @@ export default function PublicLanding() {
         </div>
       </section>
 
-      {/* SERVICE CARDS */}
-      <section className="services-preview">
-        <div className="service-card" onClick={() => navigate("/services")}>
-          <h3>Design Services</h3>
-          <p>UX audits, UI design, branding</p>
-        </div>
+      <section className="content-grid">
+  <Card
+    tag="FEATURED"
+    title="A smarter way to buy services"
+    desc="Compare providers, pricing, and delivery timelines in one place."
+    onClick={() => scrollTo("services")}
+  />
 
-        <div className="service-card" onClick={() => navigate("/services")}>
-          <h3>Development</h3>
-          <p>Frontend, backend, performance</p>
-        </div>
+  <Card
+    tag="GUIDE"
+    title="How FlowServe works"
+    desc="From discovery to checkout in minutes."
+    onClick={() => scrollTo("how-it-works")}
+  />
 
-        <div className="service-card" onClick={() => navigate("/services")}>
-          <h3>Consulting</h3>
-          <p>Product, architecture, scaling</p>
-        </div>
-      </section>
+  <Card
+    tag="PROVIDER"
+    title="Work with verified experts"
+    desc="Only vetted professionals with real delivery history."
+    onClick={() => navigate("/providers")}
+  />
 
-      {/* HOW IT WORKS */}
-      <section id="how-it-works" className="how-it-works">
-        <h2>How FlowServe works</h2>
+  <Card
+    tag="PRICING"
+    title="Transparent pricing, no surprises"
+    desc="See costs upfront before you commit."
+    onClick={() => navigate("/pricing")}
+  />
+</section>
 
-        <div className="flow-step left">
-          <h3>1. Discover services</h3>
-          <p>
-            Browse curated professional services with transparent pricing
-            and clear scope.
-          </p>
-        </div>
 
-        <div className="flow-step right">
-          <h3>2. Purchase securely</h3>
-          <p>
-            Add services to cart and checkout securely when you’re ready.
-          </p>
-        </div>
 
-        <div className="flow-step left">
-          <h3>3. Track & manage</h3>
-          <p>
-            Manage orders, history, and future purchases from one place.
-          </p>
-        </div>
-      </section>
+
+<section id="how-it-works" className="story-section">
+  <div className="story-content">
+
+    <div className="story-left">
+      <h2 className="story-heading">
+        Built for modern teams.
+        <br />
+        Designed for speed.
+      </h2>
+
+      <p className="story-paragraph">
+        FlowServe removes the friction from buying professional services.
+        No scattered vendors. No unclear pricing. No messy coordination.
+      </p>
+
+      <p className="story-paragraph">
+        Discover curated services with transparent scope. Compare options
+        confidently. Purchase securely. Track and manage everything
+        in one powerful dashboard.
+      </p>
+
+      <p className="story-highlight">
+        Clarity. Control. Confidence.
+      </p>
+    </div>
+
+    <div className="story-right">
+      <div className="visual-card">
+        <div className="visual-badge">AI Powered</div>
+        <h3>Smart Service Matching</h3>
+        <p>
+          Intelligent recommendations based on your business needs,
+          past purchases, and performance history.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  {/* Floating blobs */}
+  <div className="blob blob-1"></div>
+  <div className="blob blob-2"></div>
+</section>
 
       {/* CTA */}
       <section className="cta">

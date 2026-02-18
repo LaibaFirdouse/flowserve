@@ -45,6 +45,18 @@ function cartReducer(state, action) {
       };
     }
 
+    case "DECREMENT_ITEM":
+      return {
+        ...state,
+        items: state.items
+          .map(item =>
+            item.id === action.payload
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          )
+          .filter(item => item.quantity > 0)
+      };
+
     case "REMOVE_ITEM":
       return {
         ...state,
@@ -63,6 +75,7 @@ function cartReducer(state, action) {
       return state;
   }
 }
+
 
 /* -------------------- PROVIDER -------------------- */
 export function CartProvider({ children }) {
@@ -101,6 +114,10 @@ export function CartProvider({ children }) {
   const removeItem = (id) =>
     dispatch({ type: "REMOVE_ITEM", payload: id });
 
+  const decrementItem = (id) =>
+  dispatch({ type: "DECREMENT_ITEM", payload: id });
+
+
   const clearCart = () =>
     dispatch({ type: "CLEAR_CART" });
 
@@ -108,11 +125,12 @@ export function CartProvider({ children }) {
   return (
     <CartContext.Provider
       value={{
-        items: state.items,
-        addItem,
-        removeItem,
-        clearCart
-      }}
+  items: state.items,
+  addItem,
+  decrementItem,
+  removeItem,
+  clearCart
+}}
     >
       {children}
     </CartContext.Provider>

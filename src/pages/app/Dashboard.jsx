@@ -32,47 +32,37 @@ export default function Dashboard() {
       </section>
 
       {/* PRIMARY ACTIONS */}
-      <section className="dashboard-actions">
-        <div
-          className="action-card"
-          onClick={() => navigate("/app/services")}
-        >
-          <h3>Explore Services</h3>
-          <p>Browse curated professional services tailored for you.</p>
-        </div>
+      
+      <section className="core-actions">
 
-        <div
-          className="action-card"
-          onClick={() => navigate("/app/orders")}
-        >
-          <h3>Track Orders</h3>
-          <p>View your past purchases and order status.</p>
-        </div>
+  <div className="action-card">
+    <h3>Explore Services</h3>
+    <p>
+      Discover curated professional services tailored to your business.
+    </p>
+    <button onClick={() => navigate("/app/services")}>Browse Services</button>
+  </div>
 
-        <div
-          className="action-card"
-          onClick={() => navigate("/app/cart")}
-        >
-          <h3>Your Cart</h3>
-          <p>Review selected services before checkout.</p>
-        </div>
-      </section>
+  <div className="action-card">
+    <h3>Track Orders</h3>
+    <p>
+      Monitor purchases, delivery status, and order history in one place.
+    </p>
+    <button>View Orders</button>
+  </div>
 
-      {/* VALUE PROPS */}
-      <section className="dashboard-values">
-        <div>
-          <h4>Curated Services</h4>
-          <p>High-quality offerings selected for real business needs.</p>
-        </div>
-        <div>
-          <h4>Transparent Pricing</h4>
-          <p>No hidden fees. Know exactly what you’re paying for.</p>
-        </div>
-        <div>
-          <h4>Secure Checkout</h4>
-          <p>Your data and payments are handled safely.</p>
-        </div>
-      </section>
+  <div className="action-card">
+    <h3>Your Cart</h3>
+    <p>
+      Review selected services and proceed to secure checkout.
+    </p>
+    <button onClick={() => navigate("/app/cart")}>Go to Cart</button>
+  </div>
+
+</section>
+
+
+      
 
       {/* CTA */}
       <section className="dashboard-cta">

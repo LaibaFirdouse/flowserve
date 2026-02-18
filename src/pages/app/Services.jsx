@@ -22,26 +22,6 @@ const navigate = useNavigate();
     search: debouncedSearch
   });
 
-  const renderedList = useMemo(() => {
-  return data.map(service => (
-    <li key={service.id} className="service-card">
-      <h4>{service.title}</h4>
-      <p>₹{service.price}</p>
-
-      <button
-  onClick={() => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
-    addItem(service);
-  }}
->
-  Add to Cart
-</button>
-    </li>
-  ));
-}, [data, addItem, addedId]);
 
 
 // useEffect(() => {
@@ -62,28 +42,61 @@ const navigate = useNavigate();
   return <p className="muted">No services match your search</p>;
 
   return (
-    <div className="services-header">
-  <h3>Available Services</h3>
+  <div className="services-page">
+    <div className="services-container">
 
-  <input
-    placeholder="Search services..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
+      <div className="services-header">
+        <h1>Available Services</h1>
+        <input
+          type="text"
+          placeholder="Search services..."
+          className="service-search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
-      <ul className="service-grid">
-  {renderedList}
-</ul>
+      <div className="services-grid">
+        {data.map(service => (
+          <div key={service.id} className="service-card">
+            <div>
+              <div className="service-title">{service.title}</div>
+              <div className="service-price">₹{service.price}</div>
+            </div>
 
-      <button disabled={page === 1} onClick={() => setPage(p => p - 1)}>
-        Prev
-      </button>
-      <button
-        disabled={page * 4 >= total}
-        onClick={() => setPage(p => p + 1)}
-      >
-        Next
-      </button>
+            <button
+              className="add-btn"
+              onClick={() => {
+                if (!user) {
+                  navigate("/login");
+                  return;
+                }
+                addItem(service);
+              }}
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div className="pagination">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage(prev => prev - 1)}
+        >
+          Prev
+        </button>
+
+        <button
+          disabled={page * 4 >= total}
+          onClick={() => setPage(prev => prev + 1)}
+        >
+          Next
+        </button>
+      </div>
+
     </div>
-  );
+  </div>
+);
 }

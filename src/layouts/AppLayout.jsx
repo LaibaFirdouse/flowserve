@@ -1,47 +1,39 @@
-// import { Outlet } from "react-router-dom";
-// import { useCart } from "../context/CartContext";
-
-// export default function AppLayout() {
-//   const { items } = useCart();
-
-//   return (
-//     <div className="app-shell">
-//       <header className="app-header">
-//   <h2 className="logo">ServiceHub</h2>
-
-//   <nav className="nav-links">
-//     <span>Services</span>
-//     <span>Orders</span>
-//   </nav>
-
-//   <div className="cart-badge">
-//     🛒 {items.length}
-//   </div>
-// </header>
-
-
-//       <main className="app-content">
-//         <Outlet />
-//       </main>
-//     </div>
-//   );
-// }
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import { FiShoppingCart } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export default function AppLayout() {
-  const { items } = useCart();
+  const { items = [] } = useCart();
+const navigate = useNavigate();
+
+const totalItems = items.reduce(
+  (sum, item) => sum + (item.quantity || 1),
+  0
+);
+console.log("Cart in header:", items);
 
   return (
-    <>
+    <div>
+
       <header className="app-header">
-        <h2>ServiceHub</h2>
-        <div>Cart ({items.length})</div>
+        <Link to="/app" className="logo">
+          FlowServe
+        </Link>
+
+        <div className="cart-container" onClick={() => navigate("/app/cart")}>
+  <FiShoppingCart className="cart-icon" />
+  {totalItems > 0 && (
+    <span className="cart-badge">{totalItems}</span>
+  )}
+
+</div>
       </header>
 
       <main>
         <Outlet />
       </main>
-    </>
+
+    </div>
   );
 }

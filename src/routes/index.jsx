@@ -15,6 +15,7 @@ import Providers from "../pages/provider/Providers";
 /* ---------- AUTH PAGES ---------- */
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+import ForgotPassword from "../pages/auth/ForgotPassword";
 
 /* ---------- USER APP ---------- */
 import Dashboard from "../pages/app/Dashboard";
@@ -49,6 +50,7 @@ export default function AppRouter() {
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
       {/* ===================================================== */}

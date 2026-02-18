@@ -60,8 +60,8 @@ export default function PublicLayout() {
           }}>
             How it works
           </span>
-          <span>Pricing</span>
-          <span>Providers</span>
+          <span onClick={() => navigate("/pricing")}>Pricing</span>
+          <span onClick={() => navigate("/providers")}>Providers</span>
         </nav>
 
         <button className="secondary" onClick={() => navigate("/login")}>

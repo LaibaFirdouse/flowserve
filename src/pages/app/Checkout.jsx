@@ -1,64 +1,153 @@
 import { useState } from "react";
+import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
+  const { items, clearCart } = useCart();
+  const navigate = useNavigate();
+
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
-const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
+
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const progressPercent = (step / 4) * 100;
+
+  const handlePlaceOrder = () => {
+    clearCart();
+    setStep(4);
+  };
+
+  if (items.length === 0 && step !== 4) {
+    return (
+      <div className="checkout-empty">
+        <h2>Your cart is empty</h2>
+        <button onClick={() => navigate("/app/services")}>
+          Browse Services
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h2>Checkout</h2>
-      <p className="step-indicator">
-      Step {step} of 4
-    </p>
-    <div className="checkout-step">
+    <div className="checkout-page">
 
-      {step === 1 && (
-        <>
-          <h3>Review</h3>
-          <p>Review your cart items</p>
-          <button onClick={() => setStep(2)}>Continue</button>
-        </>
-      )}
+      {/* LEFT SIDE */}
+      <div className="checkout-main">
 
-      {step === 2 && (
-        <>
-          <h3>Details</h3>
-          <input
-  placeholder="Full Name"
-  value={name}
-  onChange={(e) => setName(e.target.value)}
-/>
+        <h2>Secure Checkout</h2>
 
-<input
-  placeholder="Email"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-/>
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
 
-<button
-  disabled={!name || !email}
-  onClick={() => setStep(3)}
->
-  Continue
-</button>
-        </>
-      )}
+        <p className="step-indicator">Step {step} of 4</p>
 
-      {step === 3 && (
-        <>
-          <h3>Confirm</h3>
-          <button onClick={() => setStep(4)}>Place Order</button>
-        </>
-      )}
+        {step === 1 && (
+          <div className="checkout-section">
+            <h3>Review Your Order</h3>
 
-      {step === 4 && (
-        <>
-          <h3>Success 🎉</h3>
-          <p>Your order has been placed.</p>
-        </>
-      )}
+            {items.map(item => (
+              <div key={item.id} className="review-item">
+                <span>{item.title}</span>
+                <span>₹{item.price * item.quantity}</span>
+              </div>
+            ))}
+
+            <button
+              className="primary-btn"
+              onClick={() => setStep(2)}
+            >
+              Continue
+            </button>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className="checkout-section">
+            <h3>Contact Details</h3>
+
+            <input
+              className="checkout-input"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <input
+              className="checkout-input"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <button
+              className="primary-btn"
+              disabled={!name || !email}
+              onClick={() => setStep(3)}
+            >
+              Continue
+            </button>
+          </div>
+        )}
+
+        {step === 3 && (
+          <div className="checkout-section">
+            <h3>Confirm & Pay</h3>
+
+            <p>
+              You’re about to purchase services worth ₹{subtotal}.
+            </p>
+
+            <button
+              className="primary-btn"
+              onClick={handlePlaceOrder}
+            >
+              Place Order
+            </button>
+          </div>
+        )}
+
+        {step === 4 && (
+          <div className="checkout-success">
+            <h3>🎉 Order Confirmed</h3>
+            <p>Thank you {name}, your services are being processed.</p>
+
+            <button
+              className="primary-btn"
+              onClick={() => navigate("/app")}
+            >
+              Go to Dashboard
+            </button>
+          </div>
+        )}
+
       </div>
+
+      {/* RIGHT SIDE */}
+      <div className="checkout-summary">
+        <h3>Order Summary</h3>
+
+        {items.map(item => (
+          <div key={item.id} className="summary-item">
+            <span>{item.title} × {item.quantity}</span>
+            <span>₹{item.price * item.quantity}</span>
+          </div>
+        ))}
+
+        <div className="summary-total">
+          <span>Total</span>
+          <span>₹{subtotal}</span>
+        </div>
+      </div>
+
     </div>
   );
 }
