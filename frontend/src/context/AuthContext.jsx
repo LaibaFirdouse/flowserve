@@ -32,6 +32,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
     dispatch({ type: "LOGIN", payload: user });
   };
 

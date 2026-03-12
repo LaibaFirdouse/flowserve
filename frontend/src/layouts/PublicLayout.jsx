@@ -39,10 +39,12 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 export default function PublicLayout() {
   const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
 
   const goToSection = (sectionId) => {
     navigate(`/#${sectionId}`);
@@ -100,7 +102,12 @@ export default function PublicLayout() {
     <>
       <header className="public-header">
 
-        <div className="brand" onClick={() => navigate("/")}>
+        <div
+          className="brand"
+          onClick={() =>
+            isAuthenticated ? navigate("/app") : navigate("/")
+          }
+        >
           FlowServe
         </div>
 
@@ -124,12 +131,24 @@ export default function PublicLayout() {
 
         </nav>
 
-        <button
-          className="secondary"
-          onClick={() => navigate("/login")}
-        >
-          Login
-        </button>
+        {!isAuthenticated ? (
+          <button
+            className="secondary"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </button>
+        ) : (
+          <button
+            className="secondary"
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+          >
+            Logout
+          </button>
+        )}
 
       </header>
 

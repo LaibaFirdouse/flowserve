@@ -15,16 +15,40 @@ export default function Login() {
   const validate = () => {
     const newErrors = {};
 
+    // EMAIL VALIDATION
     if (!email) {
       newErrors.email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-      newErrors.email = "Invalid email format";
+    } else {
+      const emailRegex =
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+      if (!emailRegex.test(email.trim())) {
+        newErrors.email = "Enter a valid email address";
+      }
+
+      if (email.length > 254) {
+        newErrors.email = "Email is too long";
+      }
     }
 
+    // PASSWORD VALIDATION
     if (!password) {
       newErrors.password = "Password is required";
-    } else if (password.length < 6) {
-      newErrors.password = "Minimum 6 characters";
+    } else {
+      if (password.length < 8) {
+        newErrors.password = "Password must be at least 8 characters";
+      } else if (password.length > 128) {
+        newErrors.password = "Password is too long";
+      } else if (!/[A-Z]/.test(password)) {
+        newErrors.password = "Must contain at least one uppercase letter";
+      } else if (!/[a-z]/.test(password)) {
+        newErrors.password = "Must contain at least one lowercase letter";
+      } else if (!/[0-9]/.test(password)) {
+        newErrors.password = "Must contain at least one number";
+      } else if (!/[!@#$%^&*]/.test(password)) {
+        newErrors.password =
+          "Must contain at least one special character (!@#$%^&*)";
+      }
     }
 
     setErrors(newErrors);
@@ -39,7 +63,7 @@ export default function Login() {
     setLoading(true);
 
     setTimeout(() => {
-      if (email === "user@test.com" && password === "123456") {
+      if (email === "user@test.com" && password === "Test@1234") {
         login({
           id: 1,
           email,
@@ -110,9 +134,6 @@ export default function Login() {
           <Link to="/forgot-password">Forgot password?</Link>
           <Link to="/register">Create account</Link>
         </div>
-
-          
-        
 
         <div className="divider">OR</div>
 
