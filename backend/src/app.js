@@ -28,5 +28,5 @@ app.use("/api/services", serviceRoutes);
 
 module.exports = app;
 
-const cors = require("cors");
+
 
