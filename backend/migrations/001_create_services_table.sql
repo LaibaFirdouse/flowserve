@@ -30,4 +30,5 @@ INSERT INTO services (id, title, price, category) VALUES
 (22, 'Design to Code Consistency Check', 209, 'Design'),
 (23, 'Frontend Security Review', 319, 'Development'),
 (24, 'Responsive Design Audit', 179, 'Design'),
-(25, 'Codebase Maintainability Review', 299, 'Development');
+(25, 'Codebase Maintainability Review', 299, 'Development')
+ON CONFLICT (id) DO NOTHING;
