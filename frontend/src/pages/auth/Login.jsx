@@ -69,7 +69,7 @@ export default function Login() {
           email,
           role: "user"
         });
-        navigate("/app");
+        navigate("/services");
       } else {
         setServerError("Invalid email or password");
       }

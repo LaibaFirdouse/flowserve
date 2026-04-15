@@ -1,0 +1,110 @@
+/* Background and animation styles for PublicLanding */
+.landing {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  color: #e6eef8;
+  background: linear-gradient(180deg, #051334 0%, #021021 60%);
+}
+
+/* background gradient layer */
+.bg-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.8;
+  transform-origin: center;
+  animation: float 12s ease-in-out infinite;
+}
+
+.bg-shape.shape-1 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at 30% 30%, rgba(99,102,241,0.9), transparent 45%);
+  top: -120px;
+  left: -80px;
+  animation-duration: 16s;
+}
+
+.bg-shape.shape-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle at 70% 30%, rgba(16,185,129,0.9), transparent 45%);
+  top: 40px;
+  right: -120px;
+  animation-duration: 18s;
+}
+
+.bg-shape.shape-3 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle at 50% 50%, rgba(14,165,233,0.8), transparent 45%);
+  bottom: -120px;
+  left: 20%;
+  animation-duration: 14s;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-24px) scale(1.03); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* ensure content sits above the background */
+.landing > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero {
+  padding: 6rem 2rem 3rem;
+  background: linear-gradient(135deg, rgba(2,6,23,0.24), rgba(1,10,25,0.04));
+  border-radius: 12px;
+  margin: 2rem;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 1rem 2rem 2rem;
+}
+
+.visual-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  padding: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(2,6,23,0.45);
+  transform: translateY(0);
+  animation: rise 900ms ease both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.06;
+  filter: blur(24px);
+  z-index: 1;
+}
+
+.blob-1 { width: 260px; height: 260px; right: 6rem; top: 8rem; background: #7dd3fc; }
+.blob-2 { width: 180px; height: 180px; left: 4rem; bottom: 12rem; background: #60a5fa; }
+
+/* subtle hover for hero actions */
+.hero-actions .primary:hover { transform: translateY(-2px); transition: transform 160ms ease; }
+
+/* footer bottom contrast */
+.footer-bottom { position: relative; z-index: 2; padding: 1.2rem 2rem; text-align: center; color: rgba(255,255,255,0.75); }

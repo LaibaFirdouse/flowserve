@@ -253,7 +253,7 @@ export default function Register() {
         role: form.role
       });
 
-      navigate("/app");
+      navigate("/services");
       setLoading(false);
     }, 1000);
   };

@@ -1,5 +1,9 @@
 /* ---------- Services Page ---------- */
 
+body {
+  overflow-x: hidden;
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -193,6 +197,15 @@ button.secondary {
   padding: 12px 20px;
   border-radius: 6px;
   cursor: pointer;
+
+}
+
+button.tertiary {
+  border-color: #2563eb;
+  background: transparent;
+  padding: 12px 30px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 /* ACTION CARDS */
@@ -348,6 +361,7 @@ button.secondary {
   /* stays in normal flow */
   top: 0;
   z-index: 1000;
+
   /* above all content */
 
 
@@ -539,6 +553,7 @@ button.secondary {
   border-radius: 16px;
   padding: 32px;
   background: white;
+  cursor: pointer;
 }
 
 .pricing-card .price {
@@ -1139,6 +1154,12 @@ Card-desc {
 }
 
 .cart-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+.cart-container {
   position: relative;
   cursor: pointer;
   display: flex;
@@ -1147,13 +1168,13 @@ Card-desc {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #f3f4f6;
+  /* background: #f3f4f6; */
   transition: all 0.2s ease;
 }
 
-.cart-container:hover {
+/* .cart-container:hover {
   background: #e5e7eb;
-}
+} */
 
 .cart-icon {
   font-size: 24px;
@@ -1292,11 +1313,7 @@ Card-desc {
   padding: 0 20px;
 }
 
-.cart-container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 40px;
-}
+
 
 .cart-items h2 {
   margin-bottom: 20px;
@@ -1540,4 +1557,317 @@ Card-desc {
 .footer-column li:hover {
   color: #7c3aed;
   transform: translateX(3px);
+}
+
+.testimonials-page {
+  padding: 60px;
+  text-align: center;
+}
+
+.testimonials-page h1 {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.testimonials-grid {
+  display: flex;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+  padding: 40px;
+}
+
+
+.testimonial-card {
+  background: white;
+  padding: 24px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  min-width: 250px;
+  margin-right: 16px;
+
+  color: rgb(7, 7, 7);
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s ease;
+}
+
+.testimonial-card p {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel:hover .testimonials-grid {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.hero {
+
+  width: 100%;
+  height: 60vh;
+  background: #fff;
+  font-family: 'Noto Sans', sans-serif;
+  background: url('https://images.pexels.com/photos/29067690/pexels-photo-29067690.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+
+
+  inset: 0;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+
+
+
+}
+
+.main-glass {
+
+  height: 300px;
+  width: 500px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* .hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+
+  background: linear-gradient(90deg, #a855f7, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */
+
+.hero p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.main-glass h1 span {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 3rem;
+  font-weight: 700;
+
+}
+
+.main-glass {
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.4),
+    inset 0 0 0.5px rgba(255, 255, 255, 0.4);
+}
+
+/* Skeleton */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150px;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent);
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+.skeleton-title {
+  height: 18px;
+  width: 70%;
+  background: #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.skeleton-price {
+  height: 14px;
+  width: 40%;
+  background: #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.skeleton-btn {
+  height: 36px;
+  width: 120px;
+  background: #e5e7eb;
+  border-radius: 8px;
+}
+
+
+
+.add-btn.added {
+  background: #16a34a;
+}
+
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-trigger {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.profile-email {
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.cart-page {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  padding: 40px;
+}
+
+.cart-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-right {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.cart-summary {
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.summary-row.total {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.checkout-btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: purple;
+  color: white;
+  font-size: 10px;
+  border-radius: 50%;
+  padding: 4px 6px;
+}
+
+body {
+  overflow-x: hidden;
 }

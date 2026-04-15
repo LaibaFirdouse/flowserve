@@ -11,26 +11,44 @@ export default function PublicLanding() {
   return (
     <div className="landing">
 
-      {/* HERO */}
+
+
       <section id="services-section" className="hero">
-        <h1>
-          Discover services.<br />
-          <span>Work smarter.</span>
-        </h1>
 
-        <p>
-          FlowServe helps teams find, purchase, and manage professional services
-          with clarity, speed, and confidence.
-        </p>
 
-        <div className="hero-actions">
-          <button id="prim1" className="primary" onClick={() => navigate("/services")}>
-            Browse Services
-          </button>
-          <button className="secondary" onClick={() => navigate("/login")}>
-            Login
-          </button>
+        <div className="main-glass">
+
+          <h1>
+            Discover services.<br />
+            <span>Work smarter.</span>
+          </h1>
+
+          <p>
+            FlowServe helps teams find, purchase, and manage professional services
+            with clarity, speed, and confidence.
+          </p>
+
+          <div className="hero-actions">
+            <button
+              id="prim1"
+              className="primary"
+              onClick={() => navigate("/services")}
+            >
+              Browse Services
+            </button>
+
+            <button
+              id="sec1"
+              className="secondary"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          </div>
+
         </div>
+
+
 
       </section>
 
@@ -113,35 +131,14 @@ export default function PublicLanding() {
 
       {/* CTA */}
       <section className="cta">
-        <h2>Start using FlowServe today</h2>
-        <button className="primary" onClick={() => navigate("/services")}>
+        <h2 style={{ fontFamily: "sans-serif" }}>Start using FlowServe today</h2>
+        <button className="tertiary" onClick={() => navigate("/services")}>
           Explore Services
         </button>
       </section>
 
-      {/* FOOTER */}
-      {/* <footer className="footer">
-        <div>
-          <h4>FlowServe</h4>
-          <span>About</span>
-          <span>Careers</span>
-          <span>Contact</span>
-        </div>
 
-        <div>
-          <h4>Product</h4>
-          <span>Services</span>
-          <span>Pricing</span>
-          <span>Providers</span>
-        </div>
 
-        <div>
-          <h4>Resources</h4>
-          <span>Blog</span>
-          <span>Docs</span>
-          <span>Support</span>
-        </div>
-      </footer> */}
       <footer className="footer">
 
         <div className="footer-container">

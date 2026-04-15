@@ -26,7 +26,7 @@ export default function Checkout() {
     return (
       <div className="checkout-empty">
         <h2>Your cart is empty</h2>
-        <button onClick={() => navigate("/app/services")}>
+        <button onClick={() => navigate("/services")}>
           Browse Services
         </button>
       </div>
@@ -83,18 +83,23 @@ export default function Checkout() {
 
             <input
               className="checkout-input"
-              placeholder="Email Address"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
+            {email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && (
+              <p className="error-text">Enter valid email</p>
+            )}
             <button
               className="primary-btn"
-              disabled={!name || !email}
+              disabled={!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)}
               onClick={() => setStep(3)}
             >
               Continue
             </button>
+
+
           </div>
         )}
 
@@ -122,7 +127,7 @@ export default function Checkout() {
 
             <button
               className="primary-btn"
-              onClick={() => navigate("/app")}
+              onClick={() => navigate("/")}
             >
               Go to Dashboard
             </button>
