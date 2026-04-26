@@ -1,142 +1,3 @@
-
-// import { Outlet, useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
-// import { useLocation } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
-// import { useCart } from "../context/CartContext";
-
-
-
-
-
-// export default function PublicLayout() {
-//   const navigate = useNavigate();
-//   const { isAuthenticated, logout } = useAuth();
-//   const { items } = useCart();
-
-
-//   const goToSection = (sectionId) => {
-//     navigate(`/#${sectionId}`);
-//   };
-
-//   const location = useLocation();
-
-//   useEffect(() => {
-//     if (location.hash) {
-//       const id = location.hash.replace("#", "");
-//       const element = document.getElementById(id);
-
-//       if (element) {
-//         element.scrollIntoView({ behavior: "smooth" });
-//       }
-//     }
-//   }, [location]);
-
-
-
-
-
-//   return (
-//     <>
-//       <header className="public-header">
-
-//         <div
-//           className="brand"
-
-//           onClick={() => navigate("/")}
-
-//         >
-//           FlowServe
-//         </div>
-
-
-
-//         {/* <nav className="public-nav">
-
-//           <span onClick={() => goToSection("services-section")}>
-//             Services
-//           </span>
-
-
-//           <span onClick={() => goToSection("how-it-works")}>
-//             How it works
-//           </span>
-
-//           <span onClick={() => navigate("/pricing")}>
-//             Pricing
-//           </span>
-
-//           <span onClick={() => navigate("/providers")}>
-//             Providers
-//           </span>
-
-//           <span onClick={() => navigate("/testimonials")}>
-//             Testimonials
-//           </span>
-
-//         </nav> */}
-//         <nav className="public-nav">
-
-//           <span onClick={() => goToSection("services-section")}>
-//             Services
-//           </span>
-
-//           <span onClick={() => goToSection("how-it-works")}>
-//             How it works
-//           </span>
-
-//           <span onClick={() => navigate("/pricing")}>
-//             Pricing
-//           </span>
-
-//           <span onClick={() => navigate("/providers")}>
-//             Providers
-//           </span>
-
-//           <span onClick={() => navigate("/testimonials")}>
-//             Testimonials
-//           </span>
-
-//           {/* 🔥 ONLY WHEN LOGGED IN */}
-//           {isAuthenticated && (
-//             <>
-//               <span onClick={() => navigate("/orders")}>
-//                 Orders
-//               </span>
-
-//               <span onClick={() => navigate("/cart")}>
-//                 Cart ({items.length})
-//               </span>
-//             </>
-//           )}
-
-//         </nav>
-
-//         {!isAuthenticated ? (
-//           <button
-//             className="secondary"
-//             onClick={() => navigate("/login")}
-//           >
-//             Login
-//           </button>
-//         ) : (
-//           <button
-//             className="secondary"
-//             onClick={() => {
-//               logout();
-//               navigate("/");
-//             }}
-//           >
-//             Logout
-//           </button>
-//         )}
-
-//       </header>
-
-//       <Outlet />
-//     </>
-//   );
-// }
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
@@ -173,6 +34,16 @@ export default function PublicLayout() {
       }
     }
   }, [location]);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(".profile-wrapper")) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   return (
     <>
@@ -209,7 +80,7 @@ export default function PublicLayout() {
             Testimonials
           </span>
 
-          {/* 🔥 AUTH NAV */}
+          {/* AUTH NAV */}
           {isAuthenticated && (
             <>
 
@@ -251,9 +122,15 @@ export default function PublicLayout() {
 
               {open && (
                 <div className="profile-dropdown">
-                  <p className="profile-email">{user?.email}</p>
+
+                  <div className="profile-info">
+                    <span className="profile-email">{user?.email}</span>
+                  </div>
+
+                  <hr className="dropdown-divider" />
 
                   <button
+                    className="logout-btn"
                     onClick={() => {
                       setLoggingOut(true);
 
@@ -267,6 +144,7 @@ export default function PublicLayout() {
                   >
                     {loggingOut ? "Logging out..." : "Logout"}
                   </button>
+
                 </div>
               )}
             </div>
