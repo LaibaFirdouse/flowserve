@@ -81,7 +81,7 @@ function cartReducer(state, action) {
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  // 🔒 hydration flag (CRITICAL)
+  // hydration flag (CRITICAL)
   const [hydrated, setHydrated] = useState(false);
 
   /* -------- RESTORE CART (RUNS ONCE) -------- */
@@ -115,7 +115,7 @@ export function CartProvider({ children }) {
     dispatch({ type: "REMOVE_ITEM", payload: id });
 
   const decrementItem = (id) =>
-  dispatch({ type: "DECREMENT_ITEM", payload: id });
+    dispatch({ type: "DECREMENT_ITEM", payload: id });
 
 
   const clearCart = () =>
@@ -125,12 +125,12 @@ export function CartProvider({ children }) {
   return (
     <CartContext.Provider
       value={{
-  items: state.items,
-  addItem,
-  decrementItem,
-  removeItem,
-  clearCart
-}}
+        items: state.items,
+        addItem,
+        decrementItem,
+        removeItem,
+        clearCart
+      }}
     >
       {children}
     </CartContext.Provider>
