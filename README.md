@@ -1,143 +1,169 @@
-# 🚀 FlowServe
+# FlowServe
 
-FlowServe is a full-stack SaaS-style service marketplace where users can discover professional services, manage a cart, and complete a multi-step checkout flow.
+FlowServe is a fullstack SaaS-style service marketplace application where users can browse professional services, manage a cart, and complete a multi-step checkout flow.
 
-The project demonstrates modern frontend architecture, state management, protected routing, and backend-driven authentication.
+The project focuses on scalable React architecture, protected routing, reusable state management patterns, and API-integrated service fetching.
 
 ---
 
-## ✨ Core Features
+## Features
 
-### 🔐 Authentication
-- User registration & login
-- Email/password validation
-- Auth state persistence via `localStorage`
+### Authentication & Route Protection
+- User login flow with form validation
+- Persistent auth state using `localStorage`
 - Protected routes using route guards
-- Role-based access (User / Provider)
+- Guest-only and authenticated route handling
+- Conditional UI rendering based on authentication state
 
-### 🛒 Cart System
-- Global cart using **React Context + useReducer**
-- Add / remove items
-- Quantity management
-- Derived cart state (subtotal, item count)
-- Persistent cart via `localStorage`
-- Live cart badge in navbar
-
-### 📦 Services Marketplace
+### Services Marketplace
 - Browse professional services
+- Search services with debounced input
 - Client-side pagination
-- Search with **debounced input**
-- Add-to-cart functionality
+- Dynamic service rendering
+- API-based service fetching with mock fallback architecture
 
-### 💳 Checkout Flow
-Multi-step checkout process:
+### Cart System
+- Global cart state using `Context API + useReducer`
+- Add/remove services from cart
+- Quantity management
+- Derived cart calculations (subtotal, item count)
+- Persistent cart state using `localStorage`
+- Live cart badge updates
 
-1. Review order  
-2. Contact details  
-3. Confirm purchase  
-4. Success page  
+### Checkout Flow
+Multi-step checkout experience including:
+- Order review
+- Contact information
+- Purchase confirmation
+- Success state handling
 
-Includes:
-- Progress indicator
+Additional functionality:
+- Progress tracking
 - Sticky order summary
-- Cart clearing after order completion
+- Cart reset after successful checkout
 
-### 🧑‍💼 Provider Tools
-- Role-based provider routes
-- Provider pricing engine
-- Protected provider dashboard
+### UI & UX
+- Layout-based application structure
+- Responsive navigation
+- Auth-aware navbar and actions
+- Loading states and skeleton behavior
+- Interactive dropdown menus
+- Reusable component architecture
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ### Frontend
-- React (Hooks)
+- React Hooks
 - React Router v6
-- Context API + useReducer
+- Context API
+- useReducer state management
 - Custom Hooks
-- Layout-based routing (Public / Auth / App / Provider)
+- Layout-based routing
+- API abstraction layer
+- Component-driven architecture
 
-### Backend
-- API-driven authentication
-- Service data endpoints
-- User role handling
+### Backend Integration
+- Service fetching through REST endpoints
+- Environment-based API configuration
+- Mock fallback support for frontend-only execution
 
 ---
 
-## 🧠 Key Concepts Demonstrated
+## Key Concepts Demonstrated
 
 - Global state management
-- Layout-based routing
-- Role-based route guards
+- Reducer-based state updates
+- Separation of concerns
+- Protected routing
 - Persistent application state
-- Multi-step transactional UI
-- Separation of public and authenticated application layers
+- Debounced search patterns
+- API abstraction
+- Reusable hooks
+- Multi-step transactional UI flows
+- Layout-based application architecture
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
-**Frontend**
+### Frontend
 - React
 - React Router
-- Context API
 - Vite
+- Context API
 - React Icons
+- CSS3
 
-**Backend**
+### Backend
 - Node.js
 - Express
 - REST API
 
 ---
 
-## 🧪 Demo Credentials
+## Demo Credentials
 
-```
+```txt
 Email: user@test.com
 Password: Test@1234
 ```
 
 ---
 
-## 🚀 Run Locally
+## Local Setup
 
-### Clone repository
+### Clone Repository
+
 ```bash
 git clone https://github.com/LaibaFirdouse/flowserve.git
 cd flowserve
 ```
 
-### Install dependencies
+### Install Dependencies
+
+Frontend:
 ```bash
 npm install
 ```
 
-### Run frontend
+Backend:
+```bash
+npm install
+```
+
+---
+
+## Run Application
+
+### Frontend
+
 ```bash
 npm run dev
 ```
 
+### Backend
 
-### Run backend
 ```bash
-npm install
 npm start
 ```
 
+---
 
-## 🔮 Future Improvements
+## Future Improvements
 
-- Stripe payment integration
-- Order history & invoices
+- Real backend authentication
+- Persistent order history
+- Payment gateway integration
+- Service reviews and ratings
 - Admin dashboard
-- Notifications system
-- Service reviews & ratings
-- Real-time order updates
+- Provider-side service management
+- Real-time notifications
+- Backend-powered cart persistence
 
 ---
 
-## 👩‍💻 Author
+## Author
 
-Built as part of a frontend engineering portfolio demonstrating real-world SaaS architecture and application state management.
+Built as part of a frontend engineering portfolio focused on scalable React architecture, reusable state management patterns, and production-style UI workflows.
