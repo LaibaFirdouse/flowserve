@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
+import { useAuth } from "../context/AuthContext";
+
 
 
 
 export default function PublicLanding() {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState(null);
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className="landing">
@@ -37,13 +40,15 @@ export default function PublicLanding() {
               Browse Services
             </button>
 
-            <button
-              id="sec1"
-              className="secondary"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
+            {!isAuthenticated && (
+              <button
+                className="secondary"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
+            )}
+
           </div>
 
         </div>

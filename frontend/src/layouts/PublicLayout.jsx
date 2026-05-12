@@ -72,24 +72,13 @@ export default function PublicLayout() {
             Pricing
           </span>
 
-          <span onClick={() => navigate("/providers")}>
-            Providers
-          </span>
+
 
           <span onClick={() => navigate("/testimonials")}>
             Testimonials
           </span>
 
-          {/* AUTH NAV */}
-          {isAuthenticated && (
-            <>
 
-
-              <span onClick={() => navigate("/orders")}>
-                Orders
-              </span>
-            </>
-          )}
         </nav>
 
 

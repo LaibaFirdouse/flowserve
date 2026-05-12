@@ -1,3 +1,3 @@
 export default function Services() {
-  return <h3>Services Page</h3>;
+    return <h3>Coming soon...</h3>;
 }

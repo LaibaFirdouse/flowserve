@@ -1,4 +1,62 @@
+import { useState } from "react";
 export default function Providers() {
+  const [services, setServices] = useState([
+    {
+      id: 1,
+      title: "Frontend Consultation",
+      price: 999
+    }
+  ]);
+
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+
+  const [editingId, setEditingId] = useState(null);
+  const handleAddService = () => {
+    if (!title || !price) return;
+
+    const newService = {
+      id: Date.now(),
+      title,
+      price: Number(price)
+    };
+
+    setServices((prev) => [...prev, newService]);
+
+    setTitle("");
+    setPrice("");
+  };
+
+  const handleDelete = (id) => {
+    setServices((prev) =>
+      prev.filter((service) => service.id !== id)
+    );
+  };
+
+  const handleEdit = (service) => {
+    setEditingId(service.id);
+    setTitle(service.title);
+    setPrice(service.price);
+  };
+
+  const handleUpdate = () => {
+    setServices((prev) =>
+      prev.map((service) =>
+        service.id === editingId
+          ? {
+            ...service,
+            title,
+            price: Number(price)
+          }
+          : service
+      )
+    );
+
+    setEditingId(null);
+    setTitle("");
+    setPrice("");
+  };
+
   return (
     <div className="providers-page">
       <h1>For service providers</h1>
